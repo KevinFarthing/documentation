@@ -1,6 +1,7 @@
 Hey.  So a horse walks into a bar, and the bartender says “why the long face?”
 
-
+some people are like clouds
+it's a beautiful day when they're gone
 
 MOST USED {
 git init

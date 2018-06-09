@@ -1,3 +1,7 @@
+Hey.  So a horse walks into a bar, and the bartender says “why the long face?”
+
+
+
 MOST USED {
 git init
 git add .

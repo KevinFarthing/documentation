@@ -1,3 +1,8 @@
+Hey.  So a horse walks into a bar, and the bartender says “why the long face?”
+
+some people are like clouds
+it's a beautiful day when they're gone
+
 MOST USED {
 git init
 git add .
@@ -166,6 +171,7 @@ agile method-way to get through projects
 scrum-neat, involves a 3 to 6 hour check-in.
 scrum involves 3 to 9 devs working in iterations of a project designated to be completed in /sprints/, 2 to 4 week intervals
 (https://en.wikipedia.org/wiki/Scrum_(software_development))
+<<<<<<< HEAD
 
 PYTHON
 
@@ -368,3 +374,5 @@ given a function (accepting 2 inputs) and an iterable, will apply the function t
 will by default use one of the functions 2 inputs to represent the rolling total.
 
 bubble, insertion, merge, selection
+=======
+>>>>>>> 749dd41defa282c6273225c741d919d8b97291c1

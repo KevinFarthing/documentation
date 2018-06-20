@@ -5,6 +5,13 @@ git commit -m "commit X"
 git push origin master
 }
 
+to add new remote to push code to - 
+git remote add NAME URL
+
+git remote v-
+lists stored locations
+
+
 
 GIT
 git init
@@ -21,7 +28,9 @@ merge
 
 git branch branch_name
 git checkout branch_name
-git checkout -b branch_name (one line version of git branch and git checkout)
+
+git checkout -b branch_name (one line version of git branch and git checkout. creates a new branchcd)
+
 git push origin branch_name (adds it to github)
 ^^^Creates new repository branch
 
@@ -157,3 +166,205 @@ agile method-way to get through projects
 scrum-neat, involves a 3 to 6 hour check-in.
 scrum involves 3 to 9 devs working in iterations of a project designated to be completed in /sprints/, 2 to 4 week intervals
 (https://en.wikipedia.org/wiki/Scrum_(software_development))
+
+PYTHON
+
+stores objects as pointers at memory addresses - this is why list a = listb, changes made to list be are reflected in lista
+
+whitespace is part of the programming language. i love it, it's like the language authors said 'fuck 'em, if the code isn't readable it won't run!'
+
+variables are case sensitive
+variable names cannot begin with a number or special char
+
+Data Types
+scalar:
+integers
+floats
+booleans
+NoneType
+
+nonscalar:
+others!
+strings
+dictionaries -- mutable
+lists (also known as arrays)  -- mutable
+tuples
+etc.
+objects (blueprint of cariables and methods which create a single entity)
+
+arithmetic
++
+-
+*
+**
+/ - always returns a float
+// - always returns an int
+common math functions
+max()
+min()
+count() - counts occurence of substring in string
+ceil() - opposite of floor division (//)
+floor()
+
+strings
+'string'
+"string"
+do NOT use 'kevin's string' - early apostrophe breaks the string early. use an escape character (/) or a better string container
+
+Either functions can be defined to work standalone, or they can be defined to use "helpers" for them to run peoperly. These helpers are called 'arguments' - as in def name() vs. dev name(person)
+
+algorithms
+bubble sorting algorithm - for loop
+as long as list mutability happens on the same line two positions can swap
+ie. list[0], list[1] = list[1], list[0]
+
+"object.method()" referred to as "dot method"
+"keyword object" -not objects
+
+Lists
+if the absolute value of the index is greater than the length, error
+list.append("item")
+list.extend([item1,item2]) - adds all items to prime list, if it contains a list
+list.insert(index, value)
+list.index(value)
+list.remove(value) - only removes first instance
+del list[index] - hm. del list deletes all values in list, not list object
+list.sort(), .sort(reverse=True), .sort(key=str.lower) - only works if list is all numbers or all strings, can't do both
+list.pop() - removes AND returns the last value in a list. Presumably there's a reason for this.
+
+[:] copies list, [::-1] reverses a list BECAUSE you can index with [start:stop:step]
+
+Tuples are immutable, however tuples can contain mutable objects, which REMAIN mutable - this is because of object oriented nature!
+the tuple contains a pointer to a list, so you're not altering the tuple pointers, but what they point TO (https://stackoverflow.com/questions/9755990/why-can-tuples-contain-mutable-items)
+
+hashable
+An object is hashable if it has a hash value which never changes during its lifetime (it needs a __hash__() method), and can be compared to other objects (it needs an __eq__() method). Hashable objects which compare equal must have the same hash value.
+
+Hashability makes an object usable as a dictionary key and a set member, because these data structures use the hash value internally.
+
+All of Python’s immutable built-in objects are hashable, while no mutable containers (such as lists or dictionaries) are. Objects which are instances of user-defined classes are hashable by default; they all compare unequal (except with themselves), and their hash value is their id().
+
+LIST COMPREHENSIONS ARE HUGE
+fuck map() fuck lambda we're writing shit people can read
+list = [(value to be added to list) for (for loop initializer) value in iterable if (conditional)]
+
+list comprehensions CAN contain if statements
+sum_nested(x) if isinstance(x,list) else x for x in lst
+
+list comprehension specifically returns a list assembled from the input criteria
+
+LAMBDA FUNCTIONS
+(lambda x: x**2)(5)
+'lambda x: - initiates call, defines the variable name (x)
+x**2 is the action that will be returned by the function, using the variable defined earlier
+(5) - the value to be assigned to the variable
+
+DICTIONARY
+in flask you can insert variables into your templates. you use dictionaries for this. pretty tight
+
+dict constructor
+dict_name=dict(key=value,key=value,key=value)
+
+add by using
+dict_name[new_key]=new_value
+
+.insert()
+.update()
+str
+.copy new_dict = dict.cop() - creates a NEW OBJECT instead of copying the pointer
+.has_key HAH deprectated for in dict.keys()
+dict.pop(key) returns value and removes entry - best way to remove keys?
+
+DUDE COMPARE ITERATIONS THROUGH STRINGS AND LISTS BY STARTING WITH compare_var=None!!!
+ie 
+compare = None
+for i in range(10):
+
+
+SETS
+unordered and unindexed collections
+can only hold UNIQUE values
+only noted with their '{}' syntax
+
+set1.union(set2) - joins sets together
+set1.difference(set2) - returns non-common items
+
+INTERVIEW QUESTIONS
+is python an interpreted or scripted language
+is there memory management
+sort this list
+is python an efficient language
+what are the differences between lists, tuples, dictionaries, and sets - 2 axes, mutable/immutable, ordered/unordered
+what are the differences between python2 and python3 - a TypeError is raised as warning if we try to compare unorderable types in python 3
+
+modules
+import math
+math.sqrt(num)
+
+import sqrt from math
+sqrt(num)
+
+import * from math
+don't do this.
+
+import math as stuff
+stuff.sqrt(num)
+
+dir(math) returns all objects, functions, and variables
+
+OBJECTS - BUILDING BLOCKS OF EVERYTHING
+help(object0 - help function receives an object in which you can get information on the things you can do with said object
+
+__name__ = special method type!
+
+syntax (not semantics)
+instantiation - stores a variable inside a class
+
+class Car:
+	#standard variable shared by object type. ie,
+	make ="Chevy" 
+	model="Malibu"
+	def display_info():
+		print(f"It's a {make} {model}")
+	pass
+#if inheriting characteristics
+class Chevy(Car):
+
+THIS ONE USES DEFAULT VALUES FOR FUZZY
+class Dog:
+    def __init__(self, name, breed, fuzzy="sheds everywhere"):
+        self.name = name
+        self.breed = breed
+        self.fuzzy = fuzzy
+
+dog1 = Dog("Lassie", "Border Collie", {OPTIONAL FUCK YES})
+dog1.fuzzy
+
+print("${:,.2f}".format(salary)
+
+lambda statements are ASS
+return (lambda input_var: function)(value to be assigned to input_var)
+
+map function is ASS
+map(function-sans-parentheses, iterable)
+map returns a list-object (NOT A LIST) of a function applied to every iteration of an iterable
+
+ie
+list(map(functionname, range(3)))
+ == 
+[functionname(0),functionname(1),functionname(2)]
+
+okay, map() might be cool with lambda expressions
+map(lambda x: x**2, range(10))
+yeah, it's pretty cool.
+
+filter function
+filter(function sans parantheses, iterable) - returns a list object (not a list!) of all values in iterable where the function evaluates True
+function has to return a boolean
+
+reduce
+  
+given a function (accepting 2 inputs) and an iterable, will apply the function to the return of each entry in the iterable, and return the total
+will by default use one of the functions 2 inputs to represent the rolling total.
+
+bubble, insertion, merge, selection

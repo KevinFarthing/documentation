@@ -25,7 +25,7 @@ COMMIT;|ROLLBACK;
 -- Write a query that displays the current amount due (current record of the payment amount) andDue date. 
 SELECT payment_amount, due_date FROM customer_payments;
 -- Create a View for this query
-CREATE myview AS SELECT payment_amount, due_date FROM customer_payments;
+CREATE VIEW myview AS SELECT payment_amount, due_date FROM customer_payments;
 -- Create a query that shows the date/time of maintenance to be performed on a customer’s car.
 SELECT scheduled from maintenance
 -- Create a subquery to show who that car belongs to (name of customer, name of car

@@ -1,0 +1,34 @@
+-- Write a query that finds the date/time the customer's account was created (You will have tohave these attributes defined while doing your database place)
+select * from customer; --customer includes a date_created column now.
+-- Write a query that shows the number of customers with a credit score of 650 and above.
+select * from customer
+where credit_score >= 650;
+-- Write a transaction that decreases the payment amount for a customer
+CREATE OR REPLACE FUNCTION make_payment(_payment_id int, _amount money)
+RETURNS void AS
+$BODY$
+	BEGIN
+	  UPDATE customer_payments
+	  SET payment_amount = payment_amount - _amount, due_date = due_date + 30, last_payment = current_date;
+	END
+$BODY$
+LANGUAGE 'plpgsql' VOLATILE;
+
+BEGIN;
+make_payment(int '1', money '500')
+COMMIT;|ROLLBACK;
+-- Write a transaction that increases the payment amount for a customer if they do not pay on time
+BEGIN;
+UPDATE customer_payments
+SET payment_amount = payment_amount + 50, due_amount = due_amount + 50, payment_status = 'OVERDUE';
+COMMIT;|ROLLBACK;
+-- Write a query that displays the current amount due (current record of the payment amount) andDue date. 
+SELECT payment_amount, due_date FROM customer_payments;
+-- Create a View for this query
+CREATE myview AS SELECT payment_amount, due_date FROM customer_payments;
+-- Create a query that shows the date/time of maintenance to be performed on a customer’s car.
+SELECT scheduled from maintenance
+-- Create a subquery to show who that car belongs to (name of customer, name of car
+SELECT first_name, last_name, scheduled FROM maintenance
+join account on account.account_id = maintenance.account_id
+join customer on account.customer_id = customer.customer_id;

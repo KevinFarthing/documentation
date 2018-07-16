@@ -1,0 +1,81 @@
+Standard Wrapper 
+CREATE OR REPLACE FUNCTION name(_vars)
+RETURNS void AS
+$BODY$
+  BEGIN
+
+  END
+$BODY$
+LANGUAGE 'plpgsql' VOLATILE;
+ 
+ 1. 
+ BEGIN
+     INSERT INTO car(make,model,year,value)
+     VALUES (_make,_model,_year,_value);
+ END
+
+
+2.0
+  DECLARE
+  _address_id int;
+  BEGIN
+     SELECT address.address_id INTO _address_id FROM address
+        WHERE address.address_1 = _address1 
+		AND address.address_2 = _address2 
+		AND address.city = _city 
+		AND address.state = _state 
+		AND address.country = _country 
+		AND address.zip = _zip;
+	IF NOT FOUND THEN
+		INSERT INTO address(address_1, address_2, city, state, country, zip, other_details, date_created)
+		VALUES (_address1, _address2, _city, _state, _country, _zip, _other, current_date)
+		RETURNING address_id INTO _address_id;
+		
+    END IF;
+
+	INSERT INTO customer(first_name,last_name,address_id,phone_number,credit_score)
+	VALUES (_first,_last, _address_id,_phone,_credit);
+	RETURN;
+  END
+
+
+
+
+3.0
+  DECLARE
+  _account_id int;
+  _car_val money;
+  _sold_date date;
+  BEGIN
+  	SELECT car.value into _car_val from car
+		WHERE car.car_id = _car_id;
+	 SELECT car.date_sold into _sold_date from car
+		WHERE car.car_id = _car_id;
+	IF _sold_date IS NULL THEN
+		UPDATE car
+		SET date_sold = current_date
+		WHERE car.car_id = _car_id ;
+		
+		INSERT INTO account(customer_id, car_id)
+		VALUES (_cust_id, _car_id)
+		RETURNING account_id into _account_id;
+		--------------------------------------
+		INSERT INTO financing(finance_amount, interest_rate, loan_taken, account_id)
+		VALUES (_car_val, .10, current_date, _account_id);
+		
+		INSERT INTO insurance(provider, coverage, account_id)
+		VALUES ('dealer', current_date + 180, _account_id);
+		
+		INSERT INTO customer_payments(account_id, payment_status, due_date, payment_amount, due_amount)
+		VALUES (_account_id, 'unpaid', current_date + 30, _car_val, _car_val/12 );
+		
+		RETURN;
+    END IF;
+  END
+
+
+4.0
+	BEGIN
+	  UPDATE customer_payments
+	  SET payment_amount = payment_amount - _amount, due_date = due_date + 30, last_payment = current_date;
+	END
